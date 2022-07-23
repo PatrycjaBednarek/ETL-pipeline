@@ -1,0 +1,48 @@
+on:
+  push:
+    branches:
+      - test
+
+env:
+  AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+jobs:
+  build-and-deploy:
+    name: Deploy Terraform resources to AWS
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+      - name: install requirements
+        run: python -m pip install -r requirements.txt
+
+      - name: Run unit tests
+        run: python -m pytest tests/
+      
+      - name: Zip up src folder
+        run: zip -r src.zip src
+
+      - name: Install Terraform
+        uses: hashicorp/setup-terraform@v2
+
+      - name: Terraform fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        run: terraform apply -no-color -auto-approve

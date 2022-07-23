@@ -1,0 +1,15 @@
+order_id,timestamp,store,total_price,product_name,price
+1264465957,06-06-2022 09:00:00,Chesterfield,8.95,Large Flat White,2.45
+1264465957,06-06-2022 09:00:00,Chesterfield,8.95,Large Flavoured Iced Latte - Vanilla,3.25
+1264465957,06-06-2022 09:00:00,Chesterfield,8.95,Large Flavoured Iced Latte - Hazelnut,3.25
+1136296604,06-06-2022 09:02:00,Chesterfield,8.65,Large Flavoured Iced Latte - Hazelnut,3.25
+1136296604,06-06-2022 09:02:00,Chesterfield,8.65,Regular Latte,2.15
+1136296604,06-06-2022 09:02:00,Chesterfield,8.65,Large Flavoured Iced Latte - Vanilla,3.25
+5395169090,06-06-2022 09:04:00,Chesterfield,8.15,Regular Flavoured Iced Latte - Caramel,2.75
+5395169090,06-06-2022 09:04:00,Chesterfield,8.15,Large Flavoured Latte - Hazelnut,2.85
+5395169090,06-06-2022 09:04:00,Chesterfield,8.15,Regular Flavoured Latte - Hazelnut,2.55
+7436414387,06-06-2022 09:08:00,Chesterfield,13.55,Large Flavoured Latte - Hazelnut,2.85
+7436414387,06-06-2022 09:08:00,Chesterfield,13.55,Large Flavoured Iced Latte - Hazelnut,3.25
+7436414387,06-06-2022 09:08:00,Chesterfield,13.55,Regular Flavoured Iced Latte - Vanilla,2.75
+7436414387,06-06-2022 09:08:00,Chesterfield,13.55,Regular Latte,2.15
+7436414387,06-06-2022 09:08:00,Chesterfield,13.55,Regular Flavoured Latte - Hazelnut,2.55

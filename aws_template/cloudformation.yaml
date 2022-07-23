@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: >
+  Template to deploy a simple lambda function, which logs the lambda event. And
+  also lists all files in a bucket.
+
+Resources:
+
+  LambdaFunctionRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+              - lambda.amazonaws.com
+          Action:
+            - sts:AssumeRole
+      # ManagedPolicyArns:
+      #   - arn:aws:iam:aws:policy/Amazons3ReadOnlyAccess
+      #   - arn:aws:iam:aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+      - PolicyName: LambdaLogsPolicy
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+              - logs:CreateLogGroup
+              - logs:CreateLogStream
+              - logs:PutLogEvents
+            Resource: '*'
+      - PolicyName: S3BucketAccess
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+              - s3:*
+            Resource: '*'
+
+  LambdaFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      Runtime: python3.9
+      Handler: index.handler
+      Role: !GetAtt LambdaFunctionRole.Arn
+      Code:
+        ZipFile: |
+          import boto3
+
+          def lambda_handler(event, context):
+              
+            client = boto3.client("s3")
+            
+            response = client.list_objects(Bucket="team1-store-transactions-data-raw")
+            
+            for file in response['Contents']:
+              print(file['Key'])
+            
